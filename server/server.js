@@ -2,30 +2,18 @@ require('./config/config')
 
 const express = require('express')
 const app = express()
-var bodyParser = require('body-parser')
+const mongoose = require('mongoose')
 
-// parse application/x-www-form-urlencoded
+const bodyParser = require('body-parser')
+
 app.use(bodyParser.urlencoded({ extended: false }))
- 
-// parse application/json
 app.use(bodyParser.json())
  
-app.get('/usuario', function (req, res) {
-  res.json('Get')
-})
- 
-app.post('/usuario', function (req, res) {
-    let body = req.body
-    res.status(200).json(body)
-})
-
-app.put('/usuario/:id', function (req, res) {
-    let id = req.params.id
-    res.json({id})
-})
-
-app.delete('/usuario/:id', function (req, res) {
-    res.json('Delete')
+app.use(require('./routes/usuario'))
+console.log(process.env.urlDB)
+mongoose.connect(process.env.urlDB, (err, res) => {
+    if (err) throw err;
+    console.log('Conexión exitosa')
 })
 
 app.listen(process.env.PORT, () => {
