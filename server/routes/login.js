@@ -10,9 +10,9 @@ app.post('/login', (req, res) => {
     let body = req.body;
     Usuario.findOne({email: body.email}, (err, usuarioDB) => {
         if (err) return res.status(500).json({ok: false, err})
-        if (!usuarioDB) return res.status(400).json({ok: false, err: { message: 'Tus credenciales no coinciden con nuestros registros' }})
+        if (!usuarioDB) return res.status(400).json({ok: false, err: { message: 'Error email' }})
         if (!bcrypt.compareSync(body.password, usuarioDB.password)){
-            return res.status(400).json({ok: false, err: { message: 'Tus credenciales no coinciden con nuestros registros' }})
+            return res.status(400).json({ok: false, err: { message: 'Error password' }})
         }
 
         let token = jwt.sign({
