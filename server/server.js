@@ -9,8 +9,8 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
  
-app.use(require('./routes/usuario'))
-console.log(process.env.urlDB)
+app.use(require('./routes'))
+
 mongoose.connect(process.env.urlDB, (err, res) => {
     if (err) throw err;
     console.log('Conexión exitosa')

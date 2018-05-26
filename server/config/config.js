@@ -14,3 +14,10 @@ if (process.env.NODE_ENV === 'dev') {
 
 process.env.urlDB = urlDB
 
+//Vencimiento del token
+
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30
+
+//Semilla de autenticacion
+
+process.env.SEED = process.env.SEED || 'Este-es-el-seed-de-desarrollo'
